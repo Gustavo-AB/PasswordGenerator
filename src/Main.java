@@ -38,31 +38,41 @@ public class Main {
 
         for(i = 0; i < numberLowercaseLetters; i++){
             charForPass = charForPass.concat(lowerCaseLetters[random.nextInt(lowerCaseLetters.length)]);
-            charForPass = charForPass + ",";
+            charForPass = charForPass.concat(",");
         }
 
         for(i = 0; i < numberUppercaseLetters; i++){
-            charForPass = charForPass + upperCaseLetters[random.nextInt(upperCaseLetters.length)];
-            charForPass = charForPass + ",";
+            charForPass = charForPass.concat(upperCaseLetters[random.nextInt(upperCaseLetters.length)]);
+            charForPass = charForPass.concat(",");
         }
 
         for(i = 0; i < amountNumbers; i++){
-            charForPass =  charForPass + numbers[random.nextInt(numbers.length)];
-            charForPass = charForPass + ",";
+            charForPass =  charForPass.concat(numbers[random.nextInt(numbers.length)]);
+            charForPass = charForPass.concat(",");
         }
 
         for(i = 0; i < numberSpecialChars; i++){
-            charForPass = charForPass + specialChars[random.nextInt(specialChars.length)];
-            charForPass = charForPass + ",";
+            charForPass = charForPass.concat(specialChars[random.nextInt(specialChars.length)]);
+            charForPass = charForPass.concat(",");
         }
 
         String[] passwordChars;
         passwordChars = charForPass.split(",");
 
         i = 0;
-        while(i < passwordChars.length){
-            password = password + passwordChars[random.nextInt(passwordChars.length)];
-            i++;
+        int randomIndex;
+        while(true){
+            if(i == passwordChars.length) {
+                break;
+            }
+
+            randomIndex = random.nextInt(passwordChars.length);
+
+            if(passwordChars[randomIndex] != null){
+                password = password.concat(passwordChars[randomIndex]);
+                passwordChars[randomIndex] = null;
+                i++;
+            }
         }
 
         System.out.println(password);
